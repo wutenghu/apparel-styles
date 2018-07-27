@@ -95,8 +95,9 @@ class AttributeFCN(nn.Module):
         average_pool = F.avg_pool2d(classes_conv_out, kernel_size=classes_conv_out.size()[2:])
         average_pool_flatten = average_pool.view(average_pool.size(0), -1)
         # print(average_pool_flatten)
-        classes_softmax = F.log_softmax(average_pool_flatten)
-        
+        classes_softmax = F.log_softmax(average_pool_flatten, dim=1) # do not sure about the dim value??
+        # print(classes_softmax)
+
         if self.return_conv_layer:
             return classes_conv_out, classes_softmax
         else:
