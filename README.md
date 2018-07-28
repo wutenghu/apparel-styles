@@ -34,6 +34,3 @@ Open Browser:  [http://localhost:9000](http://localhost:9000)
 
 H. Chen, A. Gallagher, B. Girod, "Describing Clothing by Semantic Attributes", European Conference on Computer Vision (ECCV), 2012.
 
-
-### The End.
-=======
