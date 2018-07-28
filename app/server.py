@@ -52,5 +52,5 @@ def main():
 
     # Start Server
     logger.info("Starting App on Port: {} with Debug Mode: {}".format(options.port, options.debug))
-    application.listen(7777)
+    application.listen(options.port)
     tornado.ioloop.IOLoop.current().start()

@@ -6,17 +6,19 @@ Predict multiple attributes for a given apparel. This app was developed during I
 
 ## Setup Environment on Local Machine
 
-### Installation
+### Env-dependencies
+
+````
+python=3.5.2
+torch=0.3.1
+numpy=1.14.5
+````
+
+### Train model & run inference service
 
 ```
 git clone https://github.com/sampathweb/apparel-styles
-
-cd <repo>  # cd apparel-styles
-
-# Install Packages
-python env/create_env.py
-source activate env/venv  # Windows users: activate env/venv
-python env/install_packages.py
+# cd apparel-styles
 
 # Build the Model
 python ml_src/build_models.py
@@ -27,7 +29,7 @@ python run_server.py
 
 ### Test App
 
-Open Browser:  [http://localhost:9000](http://localhost:9000)
+Open Browser:  [http://localhost:port](http://localhost:port)
 
 
 ## Dataset:
