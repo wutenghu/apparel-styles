@@ -12,6 +12,10 @@ Predict multiple attributes for a given apparel. This app was developed during I
 python=3.5.2
 torch=0.3.1
 numpy=1.14.5
+tornado>=4.4
+scikit-learn>=0.17
+requests>=2.10
+jupyter>=1.0
 ````
 
 ### Train model & run inference service
@@ -32,7 +36,7 @@ python run_server.py
 Open Browser:  [http://localhost:port](http://localhost:port)
 
 
-## Dataset:
+## Reference
 
 H. Chen, A. Gallagher, B. Girod, "Describing Clothing by Semantic Attributes", European Conference on Computer Vision (ECCV), 2012.
 
