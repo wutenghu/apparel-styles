@@ -1,6 +1,6 @@
-from preprocessing import train_valid_test_split, combine_labels, get_attribute_dims
-from classifiers import get_pretrained_model, create_attributes_model, AttributeFCN
-from utils import is_gpu_available
+from ml_src.preprocessing import get_attribute_dims
+from ml_src.classifiers import get_pre_trained_model, create_attributes_model, AttributeFCN
+from ml_src.utils import is_gpu_available
 
 # Train-Test Split Folders
 SOURCE_DATA_DIR = "data/ClothingAttributeDataset/images/"
@@ -21,13 +21,13 @@ if __name__ == "__main__":
 
     target_dims = get_attribute_dims(label_values_file)
     use_gpu = is_gpu_available()
-    pretrained_conv_model, _, _ = get_pretrained_model(
+    pre_trained_conv_model, _, _ = get_pre_trained_model(
             "vgg16", pop_last_pool_layer=True, use_gpu=use_gpu)
 
     attribute_models = create_attributes_model(
             AttributeFCN,
             512,
-            pretrained_conv_model,
+            pre_trained_conv_model,
             target_dims,
             "weights/vgg16-fcn-266-2/",
             labels_file,

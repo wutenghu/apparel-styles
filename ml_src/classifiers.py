@@ -13,13 +13,10 @@ import torch.utils.data as data
 
 import torchvision
 
-try:
-    from ml_src.preprocessing import make_dsets, get_label_idx_to_name, image_loader, default_loader, get_transforms
-except ImportError:
-    from preprocessing import make_dsets, get_label_idx_to_name, image_loader, default_loader, get_transforms
+from ml_src.preprocessing import make_dsets, get_label_idx_to_name, image_loader, default_loader, get_transforms
 
 
-def get_pretrained_model(arch="resnet18", pop_last_pool_layer=False, use_gpu=False):
+def get_pre_trained_model(arch="resnet18", pop_last_pool_layer=False, use_gpu=False):
     if arch == "resnet18":
         resnet = torchvision.models.resnet18(pretrained=True)
         pretrained_features = nn.Sequential(*list(resnet.children())[:-1])
@@ -449,9 +446,11 @@ def create_attributes_fc_model(pretrained_fc, pretrained_features, fc_dim, targe
     return models
 
 
-def create_attributes_model(ModelClass, in_dims, pretrained_features, target_columns, weights_root,
-                            labels_file, train_images_folder, valid_images_folder=None, is_train=True,
-                            batch_size=32, num_workers=4, num_epochs=10, use_gpu=None):
+def create_attributes_model(ModelClass, in_dims, pre_trained_features,
+                            target_columns, weights_root, labels_file,
+                            train_images_folder, valid_images_folder=None,
+                            is_train=True, batch_size=32, num_workers=4,
+                            num_epochs=10, use_gpu=None):
     models = {}
     for col_name, col_dim in target_columns.items():
         print("Processing Attribute: {}".format(col_name))
@@ -462,7 +461,7 @@ def create_attributes_model(ModelClass, in_dims, pretrained_features, target_col
         model = load_model(ModelClass, in_dims, col_dim, weights_path=load_weights_path, use_gpu=use_gpu)
         if is_train:
             print("Start Training for: {}".format(col_name))
-            model = train_model(model, pretrained_features, col_name, labels_file, train_images_folder, valid_images_folder,
+            model = train_model(model, pre_trained_features, col_name, labels_file, train_images_folder, valid_images_folder,
                                batch_size, num_workers, num_epochs, use_gpu=use_gpu)
         save_model(model, weights_path)
         models[col_name] = model
