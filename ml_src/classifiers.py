@@ -9,11 +9,10 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.autograd import Variable
 import torch.nn.functional as F
-import torch.utils.data as data
 
 import torchvision
 
-from ml_src.preprocessing import make_dsets, get_label_idx_to_name, image_loader, default_loader, get_transforms
+from ml_src.preprocessing import make_dsets, image_loader, default_loader, get_transforms
 
 
 def get_pre_trained_model(arch="resnet18", pop_last_pool_layer=False, use_gpu=False):
